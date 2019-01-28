@@ -1,7 +1,7 @@
 # A registered user.
 type User implements Entity {
     id: ID!
-    name: Name
+    name: String
     email: String
 }
 
@@ -18,8 +18,7 @@ type UsersConnection implements Connection {
 
 input StoreUserInput {
     id: ID!
-    lastName: String
-    firstName: String
+    name: String
     email: String
     clientMutationId: String!
 }

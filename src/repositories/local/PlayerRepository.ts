@@ -1,7 +1,6 @@
 import {injectable} from "inversify";
-import {IPlayerRepository} from "../../infrastructure/interfaces/IPlayerRepository";
-import {Player} from "../../model/entities/Player";
-import {User} from "../../model/entities/User";
+import {IPlayerRepository} from "../../infrastructure/interfaces";
+import {Player} from "../../model/entities";
 import playerData from "./fixtures/playerData";
 
 @injectable()
@@ -12,20 +11,17 @@ export class PlayerRepository implements IPlayerRepository<Player> {
     return Promise.apply(this.playerList.push(item));
   }
 
-  public findOne(user: User): Promise<Player> {
-    return Promise.apply(this.playerList.find(item => item.user.id === user.id));
+  public async findOne(userId: string): Promise<Player> {
+    return this.playerList.find(item => item.userId === userId);
   }
 
-  public update(user: User, item: Player): Promise<boolean> {
-    const targetIndex = this.playerList.findIndex(player => player.user.id === user.id);
-
+  public async update(userId: string, item: Player): Promise<boolean> {
+    const targetIndex = this.playerList.findIndex(player => player.userId === userId);
     this.playerList[targetIndex] = new Player({...this.playerList[targetIndex], ...item});
-
-    return Promise.apply(true);
+    return true;
   }
 
-  public find(item: Player): Promise<Player[]> {
-    return Promise.apply(this.playerList);
+  public async find(item: Player): Promise<Player[]> {
+    return this.playerList;
   }
-
 }

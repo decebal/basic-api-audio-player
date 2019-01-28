@@ -21,7 +21,7 @@ type Query {
   viewer: User! @cacheControl(scope: PRIVATE, maxAge: 240)
 
   # The song that the viewer is currently listening to.
-  song: Song!
+  song: Song
 
   # Users
   users(

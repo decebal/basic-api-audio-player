@@ -6,7 +6,6 @@ type Song implements Entity {
     artist: String
     album: String
     genre: String
-    state: SongActionState
 }
 
 type SongEdge implements Edge {
@@ -40,12 +39,17 @@ enum SongActionState {
     STOPPED
 }
 
+type Player {
+  currentSong: Song
+  currentSongState: SongActionState
+}
+
 input SongActionInput {
     id: ID!
     clientMutationId: String!
 }
 
 type SongActionPayload {
-    song: Song
+    player: Player
     clientMutationId: String!
 }

@@ -1,11 +1,9 @@
-import {inject} from "inversify";
-import {IPlayerRepository} from "../../infrastructure/interfaces/IPlayerRepository";
-import {ISongRepository} from "../../infrastructure/interfaces/ISongRepository";
-import {IUserRepository} from "../../infrastructure/interfaces/IUserRepository";
-import {Player} from "../entities/Player";
-import {Song} from "../entities/Song";
-import {User} from "../entities/User";
+import {inject, injectable} from "inversify";
+import {IPlayerRepository, ISongRepository, IUserRepository} from "../../infrastructure/interfaces";
+import {REPOSITORY_PROVIDERS} from "../../infrastructure/providers";
+import {Player, Song, User} from "../entities";
 
+@injectable()
 export class PlayerService {
 
   private songRepository: ISongRepository<Song>;
@@ -13,28 +11,81 @@ export class PlayerService {
   private playerRepository: IPlayerRepository<Player>;
 
   constructor(
-    @inject("SongRepository") songRepository: ISongRepository<Song>,
-    @inject("UserRepository") userRepository: IUserRepository<User>,
-    @inject("UserRepository") playerRepository: IPlayerRepository<Player>
+    @inject(REPOSITORY_PROVIDERS.ISongRepository) songRepository: ISongRepository<Song>,
+    @inject(REPOSITORY_PROVIDERS.IUserRepository) userRepository: IUserRepository<User>,
+    @inject(REPOSITORY_PROVIDERS.IPlayerRepository) playerRepository: IPlayerRepository<Player>
   ) {
     this.songRepository = songRepository;
     this.userRepository = userRepository;
     this.playerRepository = playerRepository;
   }
 
-  public play(user: User, song: Song): Promise<boolean> {
-    return Promise.apply(() => true);
+  public async play(user: User, song: Song): Promise<Player> {
+    const currentUser = await this.userRepository.findOne(user.id);
+    const songToBePlayed = await this.songRepository.findOne(song.id);
+
+    const newPlayer = new Player({
+      userId: currentUser.id,
+      currentSongState: 'PLAYING',
+      currentSongId: songToBePlayed.id
+    });
+
+    await this.playerRepository.update(
+      currentUser.id,
+      newPlayer
+    );
+
+    return this.getPlayer(currentUser.id);
   }
 
-  public pause(user: User, song: Song): Promise<boolean> {
-    return Promise.apply(() => true);
+  public async pause(user: User, song: Song): Promise<Player> {
+    const currentUser = await this.userRepository.findOne(user.id);
+    const songToBePlayed = await this.songRepository.findOne(song.id);
+
+    const newPLayer = new Player({
+      userId: currentUser.id,
+      currentSongState: 'PAUSED',
+      currentSongId: songToBePlayed.id
+    });
+
+    await this.playerRepository.update(
+      currentUser.id,
+      newPLayer
+    );
+
+    return this.getPlayer(currentUser.id);
   }
 
-  public stop(user: User, song: Song): Promise<boolean> {
-    return Promise.apply(() => true);
+  public async stop(user: User, song: Song): Promise<Player> {
+    const currentUser = await this.userRepository.findOne(user.id);
+    const songToBePlayed = await this.songRepository.findOne(song.id);
+
+    const newPLayer = new Player({
+      userId: currentUser.id,
+      currentSongState: 'STOPPED',
+      currentSongId: songToBePlayed.id
+    });
+
+    await this.playerRepository.update(
+      currentUser.id,
+      newPLayer
+    );
+
+    return this.getPlayer(currentUser.id);
   }
 
-  public listPlaying(): Promise<Player[]> {
-    return Promise.apply(() => true);
+  public async listPlaying(): Promise<Player[]> {
+    return;
+  }
+
+  /**
+   * Aggregate song onto the player entity
+   * @param {string} userId
+   * @returns {Promise<Player>}
+   */
+  public async getPlayer(userId: string): Promise<Player> {
+    const player = await this.playerRepository.findOne(userId);
+    player.currentSong = await this.songRepository.findOne(player.currentSongId);
+    return player;
   }
 }

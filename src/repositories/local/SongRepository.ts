@@ -1,5 +1,5 @@
 import {injectable} from "inversify";
-import {ISongRepository} from "../../infrastructure/interfaces/ISongRepository";
+import {ISongRepository} from "../../infrastructure/interfaces";
 import {Song, UUID} from "../../model/entities/Song";
 import songData from "./fixtures/songData";
 
@@ -7,19 +7,19 @@ import songData from "./fixtures/songData";
 export class SongRepository implements ISongRepository<Song> {
   private songList: Song[] = songData;
 
-  public find(): Promise<Song[]> {
-    return Promise.apply(this.songList);
+  public async find(song?: Song): Promise<Song[]> {
+    return this.songList;
   }
 
-  public findOne(id: UUID): Promise<Song> {
-    return Promise.apply(this.songList.find(song => song.id === id));
+  public async findOne(id: UUID): Promise<Song> {
+    return this.songList.find(song => song.id === id);
   }
 
-  public create(song: Song): Promise<boolean> {
-    return Promise.apply(this.songList.push(song));
+  public async create(song: Song): Promise<boolean> {
+    return this.songList.push(song) !== -1;
   }
 
-  public total(): Promise<number> {
-    return Promise.apply(this.songList.length);
+  public async total(): Promise<number> {
+    return this.songList.length;
   }
 }
