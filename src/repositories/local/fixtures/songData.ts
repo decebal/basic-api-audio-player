@@ -1,4 +1,4 @@
-import {Song} from "../model/entities/Song";
+import {Song} from "../../../model/entities/Song";
 
 export default [
   new Song({
