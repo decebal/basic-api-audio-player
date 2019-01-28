@@ -1,0 +1,20 @@
+{
+  "compileOnSave": false,
+  "files": [
+    "./src/app.ts"
+  ],
+  "compilerOptions": {
+    "rootDir": "src",
+    "target": "es6",
+    "module": "commonjs",
+    "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "allowUnusedLabels": true,
+    "allowSyntheticDefaultImports": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "exclude": ["node_modules", "./src/**/*.test.ts", "./src/**/**/**/*.test.ts", "./src/*.test.ts"],
+  "include": ["./src/**/*.ts", "./src/**/**/**/*.ts", "./src/**/**/*.ts"]
+}

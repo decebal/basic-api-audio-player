@@ -1,0 +1,17 @@
+{
+    "defaultSeverity": "warning",
+    "extends": [
+        "tslint:latest",
+        "tslint-immutable",
+        "tslint-config-prettier"
+    ],
+    "rulesDirectory": [],
+    "jsRules": {},
+    "rules": {
+        "radix": false,
+        "object-literal-sort-keys": false
+    },
+    "linterOptions": {
+        "exclude": ["*.test.ts"]
+    }
+}

@@ -1,0 +1,24 @@
+directive @cacheControl(
+    maxAge: Int,
+    scope: CacheControlScope
+) on OBJECT | FIELD_DEFINITION
+
+enum CacheControlScope {
+    PUBLIC
+    PRIVATE
+}
+
+# A valid timezone identifier
+scalar Timezone
+
+# A standard generic URI.
+scalar Uri
+
+# A representation of a day/month/year.
+scalar Date
+
+# A date/time conforming to RFC3339 format.
+scalar DateTime
+
+# A natural number (integer >= 0)
+scalar NaturalNumber

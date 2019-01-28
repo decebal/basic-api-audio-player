@@ -1,0 +1,30 @@
+
+interface Connection {
+    edges: [Edge]
+    pageInfo: PageInfo!
+    totalCount: NaturalNumber
+}
+
+interface Edge {
+    node: Entity
+    cursor: Cursor!
+}
+
+# Page info for paginating a connection.
+input Sorting {
+    orderBy: String
+    orderDirection: String
+}
+
+# Page info for paginating a connection.
+type PageInfo {
+    hasPreviousPage: Boolean!
+    hasNextPage: Boolean!
+    startCursor: Cursor
+    endCursor: Cursor
+}
+
+# A cursor used in paginating connections. Represented as a base64 encoded string.
+scalar Cursor
+
+scalar OrderDirection

@@ -1,0 +1,30 @@
+# A registered user.
+type User implements Entity {
+    id: ID!
+    name: Name
+    email: String
+}
+
+type UserEdge implements Edge {
+    node: User
+    cursor: Cursor!
+}
+
+type UsersConnection implements Connection {
+    edges: [UserEdge]
+    pageInfo: PageInfo!
+    totalCount: NaturalNumber
+}
+
+input StoreUserInput {
+    id: ID!
+    lastName: String
+    firstName: String
+    email: String
+    clientMutationId: String!
+}
+
+type StoreUserPayload {
+    user: User
+    clientMutationId: String!
+}

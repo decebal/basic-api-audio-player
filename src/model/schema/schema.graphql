@@ -1,0 +1,42 @@
+# import * from "./core/connection.graphql"
+# import * from "./core/entity.graphql"
+# import * from "./core/name.graphql"
+# import * from "./core/scalar.graphql"
+# import * from "./user/index.graphql"
+# import * from "./song/index.graphql"
+
+
+# The root query object.
+type Mutation {
+  StoreUser(input: StoreUserInput!): StoreUserPayload
+  StoreSong(input: StoreSongInput!): StoreSongPayload
+  PlaySong(input: SongActionInput!): SongActionPayload
+  PauseSong(input: SongActionInput!): SongActionPayload
+  StopSong(input: SongActionInput!): SongActionPayload
+}
+
+# The root query object.
+type Query {
+  # The currently authenticated user.
+  viewer: User! @cacheControl(scope: PRIVATE, maxAge: 240)
+
+  # The song that the viewer is currently listening to.
+  song: Song!
+
+  # Users
+  users(
+    first: NaturalNumber
+    after: Cursor
+    last: NaturalNumber
+    before: Cursor
+    sort: Sorting
+  ): UsersConnection
+
+  songs(
+    first: NaturalNumber
+    after: Cursor
+    last: NaturalNumber
+    before: Cursor
+    sort: Sorting
+  ): SongsConnection
+}

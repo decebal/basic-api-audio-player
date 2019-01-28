@@ -1,0 +1,51 @@
+# A song entity.
+type Song implements Entity {
+    id: ID!
+    url: Uri
+    track: String
+    artist: String
+    album: String
+    genre: String
+    state: SongActionState
+}
+
+type SongEdge implements Edge {
+    node: Song
+    cursor: Cursor!
+}
+
+type SongsConnection implements Connection {
+    edges: [SongEdge]
+    pageInfo: PageInfo!
+    totalCount: NaturalNumber
+}
+
+input StoreSongInput {
+    id: ID!
+    track: String
+    artist: String
+    album: String
+    genre: String
+    clientMutationId: String!
+}
+
+type StoreSongPayload {
+    song: Song
+    clientMutationId: String!
+}
+
+enum SongActionState {
+    PLAYING
+    PAUSED
+    STOPPED
+}
+
+input SongActionInput {
+    id: ID!
+    clientMutationId: String!
+}
+
+type SongActionPayload {
+    song: Song
+    clientMutationId: String!
+}
