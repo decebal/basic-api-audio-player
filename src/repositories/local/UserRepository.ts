@@ -6,7 +6,7 @@ import userData from "./fixtures/userData";
 
 @injectable()
 export class UserRepository implements IUserRepository<User> {
-  private userList: User[] = userData;
+  public userList: User[] = userData;
 
   public async findOne(id: UUID): Promise<User> {
     return this.userList.find(user => user.id === id);

@@ -5,7 +5,7 @@ import songData from "./fixtures/songData";
 
 @injectable()
 export class SongRepository implements ISongRepository<Song> {
-  private songList: Song[] = songData;
+  public songList: Song[] = songData;
 
   public async find(song?: Song): Promise<Song[]> {
     return this.songList;

@@ -5,11 +5,7 @@ import playerData from "./fixtures/playerData";
 
 @injectable()
 export class PlayerRepository implements IPlayerRepository<Player> {
-  private playerList: Player[] = playerData;
-
-  public create(item: Player): Promise<boolean> {
-    return Promise.apply(this.playerList.push(item));
-  }
+  public playerList: Player[] = playerData;
 
   public async findOne(userId: string): Promise<Player> {
     return this.playerList.find(item => item.userId === userId);
@@ -21,7 +17,11 @@ export class PlayerRepository implements IPlayerRepository<Player> {
     return true;
   }
 
-  public async find(item: Player): Promise<Player[]> {
+  public async find(item?: Player): Promise<Player[]> {
     return this.playerList;
+  }
+
+  public async create(item: Player): Promise<boolean> {
+    return this.playerList.push(item) !== -1;
   }
 }
