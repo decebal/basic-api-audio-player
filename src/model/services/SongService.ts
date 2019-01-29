@@ -15,19 +15,19 @@ const edgeTransformer = (song: Song) => ({
 });
 
 const pageInfo
-  = (connectionL) => ({
+  = () => ({
   __typename: "PageInfo",
-  // endCursor: view(lensPath(["data", "pageInfo", "endCursor"]), connectionL) || null,
-  // hasNextPage: view(lensPath(["data", "pageInfo", "hasNextPage"]), connectionL) || false,
-  // hasPreviousPage: view(lensPath(["data", "pageInfo", "hasPreviousPage"]), connectionL) || false,
-  // startCursor: view(lensPath(["data", "pageInfo", "startCursor"]), connectionL) || null
+  endCursor: null,
+  hasNextPage: false,
+  hasPreviousPage: false,
+  startCursor: null
 });
 
 const edges = (songs: Song[]) => map(edgeTransformer, songs);
 
 const connectionTransformer = (songs: Song[], totalCount) => ({
   edges: edges(songs),
-  // pageInfo: pageInfo(songs),
+  pageInfo: pageInfo(),
   totalCount
 });
 
