@@ -8,6 +8,7 @@
     "target": "es6",
     "module": "commonjs",
     "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
+    "types": ["reflect-metadata", "jest"],
     "sourceMap": true,
     "moduleResolution": "node",
     "allowUnusedLabels": true,
