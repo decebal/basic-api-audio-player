@@ -23,6 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/inversify": "^2.0.33",
+    "@types/jest": "^23.3.13",
     "@types/mongodb": "^3.1.19",
     "apollo-datasource-rest": "^0.1.5",
     "apollo-server-koa": "^2.0.0-rc.12",
@@ -53,7 +54,6 @@
     "@types/bluebird": "^3.5.20",
     "@types/config": "0.0.34",
     "@types/core-js": "0.9.36",
-    "@types/jest": "^23.3.13",
     "@types/jsonwebtoken": "^7.2.8",
     "@types/node": "^10.0.9",
     "casual": "^1.5.19",

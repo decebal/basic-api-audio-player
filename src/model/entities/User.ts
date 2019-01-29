@@ -9,8 +9,8 @@ export class User {
   constructor(custom: { id: UUID, name?: string, email?: string, createdAt?: number }) {
     const {id, name, email, createdAt} = custom;
     this.id = id;
-    this.name = name;
-    this.email = email;
+    this.name = name ? name : null;
+    this.email = email ? email : null;
     if (createdAt) {
       this.createdAt = createdAt;
     }

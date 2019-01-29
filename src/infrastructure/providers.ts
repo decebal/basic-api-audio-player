@@ -6,6 +6,7 @@ const REPOSITORY_PROVIDERS = {
 
 const SERVICE_PROVIDERS = {
   IPlayerService: Symbol.for("IPlayerService"),
+  ISongService: Symbol.for("ISongService"),
 };
 
 export { REPOSITORY_PROVIDERS, SERVICE_PROVIDERS  };
