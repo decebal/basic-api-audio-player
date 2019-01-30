@@ -3,7 +3,7 @@ import {ISongRepository} from "../../infrastructure/interfaces";
 import {REPOSITORY_PROVIDERS} from "../../infrastructure/providers";
 import {Song} from "../entities";
 import {ISongService} from "./ISongService";
-import connectionTransformer from "./relayConnection/connectionTransformer";
+import connectionTransformer, {ITransformer} from "./relayConnection/connectionTransformer";
 
 @injectable()
 export class SongService implements ISongService {
@@ -15,9 +15,12 @@ export class SongService implements ISongService {
     this.songRepository = songRepository;
   }
 
-  public async find(song?: Song): Promise<any> {
-    return connectionTransformer(
-      await this.songRepository.find(),
+  public async find(
+    song?: Song,
+    transformer: ITransformer = connectionTransformer
+  ): Promise<any> {
+    return transformer(
+      await this.songRepository.find(song),
       await this.songRepository.total()
     );
   }

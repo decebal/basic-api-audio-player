@@ -1,8 +1,28 @@
-import {map} from "ramda";
+import * as R from "ramda";
 import {IEntity} from "../../entities/IEntity";
 import {base64} from "./base64";
 
 const PREFIX = "connection_prefix:";
+
+interface IPageInfo {
+  __typename: "PageInfo",
+  endCursor: string | null,
+  hasNextPage: boolean,
+  hasPreviousPage: boolean,
+  startCursor: string | null
+}
+
+interface IEdge {
+  cursor: string,
+  node: IEntity
+}
+
+export type ITransformer = (entities: IEntity[], totalCount: number) => {
+  edges: IEdge[] | [],
+  pageInfo: IPageInfo,
+  totalCount: number
+};
+
 const cursorFromId = (id) => base64(PREFIX + id);
 
 export const edgeTransformer = (item: IEntity) => ({
@@ -10,7 +30,7 @@ export const edgeTransformer = (item: IEntity) => ({
   node: item,
 });
 
-const pageInfo
+const pageInfo: () => IPageInfo
   = () => ({
   __typename: "PageInfo",
   endCursor: null,
@@ -19,9 +39,10 @@ const pageInfo
   startCursor: null
 });
 
-const edges = (entities: IEntity[]) => map(edgeTransformer, entities);
+const edges = (entities: IEntity[]) => R.map(edgeTransformer, entities);
 
-const connectionTransformer = (entities: IEntity[], totalCount) => ({
+
+const connectionTransformer: ITransformer = (entities, totalCount) => ({
   edges: edges(entities),
   pageInfo: pageInfo(),
   totalCount

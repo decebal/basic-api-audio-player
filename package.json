@@ -45,6 +45,7 @@
     "ramda": "^0.25.0",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^8.0.1",
+    "typemoq": "^2.1.0",
     "typescript": "^3.2.4",
     "typespec-bdd": "^2.0.1",
     "winston": "^2.4.3",
