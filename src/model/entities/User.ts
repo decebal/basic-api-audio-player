@@ -1,6 +1,8 @@
+import {IEntity} from "./IEntity";
+
 export type UUID = string;
 
-export class User {
+export class User implements IEntity {
   public id: UUID;
   public name: string = "";
   public email: string = "";

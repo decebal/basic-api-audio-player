@@ -1,8 +1,10 @@
+import {IEntity} from "./IEntity";
+
 export type UUID = string;
 export type Uri = string;
 
 
-export class Song {
+export class Song implements IEntity {
   public id: UUID;
   public url: Uri = null;
   public track: string = null;

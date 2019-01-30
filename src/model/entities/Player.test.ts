@@ -2,7 +2,7 @@ import {Player} from "./Player";
 import {Song} from "./Song";
 
 describe("Player", () => {
-  it("creates a new valid player instance with defaults", () => {
+  it("creates a new valid player instance", () => {
     // given
     const userId = "bf1c16d5-118c-4ac4-9743-0df21ed29773";
     const currentSong = new Song({
@@ -29,5 +29,19 @@ describe("Player", () => {
     expect(player.currentSong).toEqual(currentSong);
     expect(player.currentSongId).toEqual(currentSongId);
     expect(player.currentSongState).toEqual(currentSongState);
+  });
+  it("creates a new valid player instance with defaults", () => {
+    // given
+    const userId = "bf1c16d5-118c-4ac4-9743-0df21ed29773";
+    // when
+    const player = new Player({
+      userId,
+    });
+    // then
+    expect(player).toEqual(player);
+    expect(player.userId).toEqual(userId);
+    expect(player.currentSong).toEqual(null);
+    expect(player.currentSongId).toEqual(null);
+    expect(player.currentSongState).toEqual(null);
   });
 });
