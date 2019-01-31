@@ -2,9 +2,10 @@ import {inject, injectable} from "inversify";
 import {IPlayerRepository, ISongRepository, IUserRepository} from "../../infrastructure/interfaces";
 import {REPOSITORY_PROVIDERS} from "../../infrastructure/providers";
 import {Player, Song, User} from "../entities";
+import {IPlayerService} from "./IPlayerService";
 
 @injectable()
-export class PlayerService {
+export class PlayerService implements IPlayerService {
 
   private songRepository: ISongRepository<Song>;
   private userRepository: IUserRepository<User>;
@@ -22,7 +23,13 @@ export class PlayerService {
 
   public async play(user: User, song: Song): Promise<Player> {
     const currentUser = await this.userRepository.findOne(user.id);
+    if (currentUser === undefined) {
+      throw new Error("User cannot be identified!");
+    }
     const songToBePlayed = await this.songRepository.findOne(song.id);
+    if (songToBePlayed === undefined) {
+      throw new Error("Cannot find requested song!");
+    }
 
     const newPlayer = new Player({
       userId: currentUser.id,
@@ -40,7 +47,13 @@ export class PlayerService {
 
   public async pause(user: User, song: Song): Promise<Player> {
     const currentUser = await this.userRepository.findOne(user.id);
+    if (currentUser === undefined) {
+      throw new Error("User cannot be identified!");
+    }
     const songToBePlayed = await this.songRepository.findOne(song.id);
+    if (songToBePlayed === undefined) {
+      throw new Error("Cannot find requested song!");
+    }
 
     const newPLayer = new Player({
       userId: currentUser.id,
@@ -58,7 +71,13 @@ export class PlayerService {
 
   public async stop(user: User, song: Song): Promise<Player> {
     const currentUser = await this.userRepository.findOne(user.id);
+    if (currentUser === undefined) {
+      throw new Error("User cannot be identified!");
+    }
     const songToBePlayed = await this.songRepository.findOne(song.id);
+    if (songToBePlayed === undefined) {
+      throw new Error("Cannot find requested song!");
+    }
 
     const newPLayer = new Player({
       userId: currentUser.id,
@@ -84,8 +103,23 @@ export class PlayerService {
    * @returns {Promise<Player>}
    */
   public async getPlayer(userId: string): Promise<Player> {
-    const player = await this.playerRepository.findOne(userId);
+    if (userId === null) {
+      throw new Error("An audio player instance depends on userId, it cannot be null!");
+    }
+    let player = await this.playerRepository.findOne(userId);
+
+    if (!player) {
+      const newPlayer = new Player({userId});
+      await this.playerRepository.create(newPlayer);
+      player = await this.playerRepository.findOne(userId);
+    }
+
+    if (!player.currentSongId) {
+      return player;
+    }
+
     player.currentSong = await this.songRepository.findOne(player.currentSongId);
+
     return player;
   }
 }
