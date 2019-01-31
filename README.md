@@ -40,3 +40,32 @@ This is achieved by making use of
   - `lint` a predefined script that runs tslint with some predefined options
   - `test:staged` a predefined script that runs unit tests related to files staged for commit
   
+### Current state of development and future tasks:
+
+#### Storage
+
+Song Metadata:
+  - the api currently has a base of 4 predefined songs being stored in memory and served locally,
+   song metadata is stored in `src/repositories/local/fixtures/songData.ts`
+  - TBD: use a graphql dataSource to retrieve metadata from a 3rd party, an `apollo-datasource-rest` would allow http calls and server caching on remote calls
+  - TBD: switch local repositories for mongodb ones (only minor progress made on that part), can be switched from `src/repositories/index.ts`
+
+Songs (audio files):
+  - the 4 predefined songs have a url attached with credentials from a public amazon s3 bucket
+  - TBD: StoreSong mutation
+
+User:
+  - authentication/a identity service should be provided through a `Bearer` header set on requests,
+  currently the header decoder is in place, but missing a public encryption key that would correspond to the authentication server,
+  meanwhile the user is hardcoded to always be a predefined one.
+  - TBD: store & retrieve user information from mongoDb  
+  - TBD: add docker-compose file for local development server dependencies  
+
+#### Actions
+
+- a song can be played/paused/stopped using the graphql corresponding mutations
+- current songs can be retrieved using the graphql corresponding query, pagination and sorting are declared, but not implemented
+- viewer query - can be used to find out more info about the currently connected user
+- song query - can be used to find out more info about the song currently being played/paused/stopped
+- TBD: StoreUser mutation - create a new user -> should only be used by the authentication server
+- TBD: StoreSong mutation - upload a new song: should upload file to s3 and set an api address for retrieving metadata if none can be provided
