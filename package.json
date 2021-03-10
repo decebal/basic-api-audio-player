@@ -63,7 +63,7 @@
     "prettier": "1.15.3",
     "ts-jest": "23.10.5",
     "tslint": "latest",
-    "tslint-config-prettier": "1.17.0",
+    "tslint-config-prettier": "1.18.0",
     "tslint-immutable": "5.5.2"
   }
 }
