@@ -64,6 +64,6 @@
     "ts-jest": "23.10.5",
     "tslint": "latest",
     "tslint-config-prettier": "1.17.0",
-    "tslint-immutable": "5.5.2"
+    "tslint-immutable": "6.0.1"
   }
 }
