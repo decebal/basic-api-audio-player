@@ -445,10 +445,10 @@
     "@types/keygrip" "*"
     "@types/node" "*"
 
-"@types/core-js@0.9.36":
-  version "0.9.36"
-  resolved "https://registry.yarnpkg.com/@types/core-js/-/core-js-0.9.36.tgz#d721e7cc0007d10ce66ad263ebf478a4071c53f4"
-  integrity sha1-1yHnzAAH0QzmatJj6/R4pAccU/Q=
+"@types/core-js@2.5.4":
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/@types/core-js/-/core-js-2.5.4.tgz#fc42ebde7d9cfa7c5f2668f117449b02348e41fd"
+  integrity sha512-Xwy8o12ak+iYgFr/KCVaVK5Sy+jFMiiPAID3+ObvMlBzy26XQJw5xu+a6rlHsrJENXj/AwJOGsJpVohUjAzSKQ==
 
 "@types/cors@^2.8.4":
   version "2.8.4"
