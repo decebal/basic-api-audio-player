@@ -55,7 +55,7 @@
     "@types/config": "0.0.38",
     "@types/core-js": "2.5.4",
     "@types/jsonwebtoken": "8.5.1",
-    "@types/node": "10.17.56",
+    "@types/node": "10.17.59",
     "casual": "1.6.2",
     "jest": "23.6.0",
     "nodemon": "1.19.4",
