@@ -25,7 +25,7 @@
     "@types/inversify": "^2.0.33",
     "@types/jest": "^26.0.0",
     "@types/mongodb": "^3.1.19",
-    "apollo-datasource-rest": "^0.13.0",
+    "apollo-datasource-rest": "^0.14.0",
     "apollo-server-koa": "^2.14.2",
     "apollo-server-testing": "^2.3.1",
     "bunyan": "^1.8.12",
