@@ -59,7 +59,7 @@
     "casual": "1.6.2",
     "jest": "27.0.5",
     "nodemon": "1.19.4",
-    "ora": "2.1.0",
+    "ora": "6.0.0",
     "prettier": "2.3.2",
     "ts-jest": "27.0.5",
     "tslint": "latest",
