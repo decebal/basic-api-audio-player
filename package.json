@@ -37,7 +37,7 @@
     "graphql-resolvers": "^0.4.0",
     "graphql-tools": "^8.0.0",
     "husky": "^7.0.0",
-    "inversify": "^5.0.1",
+    "inversify": "^6.0.0",
     "jsonwebtoken": "^8.4.0",
     "koa": "^2.5.0",
     "lint-staged": "^11.0.0",
