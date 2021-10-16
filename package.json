@@ -61,7 +61,7 @@
     "nodemon": "1.19.4",
     "ora": "6.0.1",
     "prettier": "2.4.1",
-    "ts-jest": "27.0.6",
+    "ts-jest": "27.0.7",
     "tslint": "latest",
     "tslint-config-prettier": "1.17.0",
     "tslint-immutable": "6.0.1"
